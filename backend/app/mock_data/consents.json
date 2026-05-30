@@ -1,0 +1,47 @@
+[
+  {
+    "id": "CONS001",
+    "bank": "HSBC",
+    "scope": "accounts.read",
+    "status": "active",
+    "created_at": "2026-01-10",
+    "expires_at": "2026-07-10",
+    "refresh_count": 5
+  },
+  {
+    "id": "CONS002",
+    "bank": "Barclays",
+    "scope": "balances.read",
+    "status": "active",
+    "created_at": "2026-02-15",
+    "expires_at": "2026-08-15",
+    "refresh_count": 3
+  },
+  {
+    "id": "CONS003",
+    "bank": "Lloyds",
+    "scope": "transactions.read",
+    "status": "expired",
+    "created_at": "2025-12-01",
+    "expires_at": "2026-03-01",
+    "refresh_count": 2
+  },
+  {
+    "id": "CONS004",
+    "bank": "Monzo",
+    "scope": "payments.write",
+    "status": "revoked",
+    "created_at": "2026-01-20",
+    "expires_at": "2026-07-20",
+    "refresh_count": 1
+  },
+  {
+    "id": "CONS005",
+    "bank": "Santander",
+    "scope": "accounts.read",
+    "status": "active",
+    "created_at": "2026-03-01",
+    "expires_at": "2026-09-01",
+    "refresh_count": 4
+  }
+]
