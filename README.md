@@ -1,5 +1,23 @@
 # Open Banking Consent Flow Explorer
 
+Real Rails Intelligence Dashboard for visualizing Open Banking consent management, permission scopes, token lifecycle events, and audit workflows.
+
+---
+
+## Dashboard Preview
+
+> Add your dashboard screenshot after capturing it.
+
+```text
+screenshots/dashboard.png
+```
+
+```markdown
+![Dashboard Preview](screenshots/dashboard.png)
+```
+
+---
+
 ## Overview
 
 Open Banking Consent Flow Explorer is an intelligence dashboard that visualizes how customer consent is managed within Open Banking ecosystems.
@@ -26,11 +44,31 @@ The project follows the Real Rails Intelligence Dashboard architecture using a F
 * Tailwind CSS
 * shadcn/ui
 * Recharts
+* Axios
 
 ### Backend
 
 * FastAPI
 * Python
+* Pandas
+
+---
+
+## Data Sources
+
+The project references publicly available Open Banking resources and uses synthetic data where event-level data is unavailable.
+
+Sources:
+
+* Open Banking UK
+* Plaid Documentation
+* TrueLayer Documentation
+
+Mock Data:
+
+* Synthetic user consent events
+* Token refresh history
+* Consent status records
 
 ---
 
@@ -158,7 +196,7 @@ Provides contextual insights:
 
 ## Dashboard Layout
 
-The application follows the Real Rails standard:
+The application follows the Real Rails dashboard standard.
 
 ### Main Stage (70%)
 
@@ -176,6 +214,23 @@ The application follows the Real Rails standard:
 * Dashboard Intelligence
 * Filters
 * Download Data
+
+---
+
+## System Architecture
+
+```text
+Frontend (Next.js)
+        │
+        ▼
+FastAPI Backend
+        │
+        ▼
+Mock Consent Dataset
+        │
+        ▼
+Analytics + Visualizations
+```
 
 ---
 
@@ -197,6 +252,28 @@ GET /api/consents
 
 ```http
 GET /api/scopes
+```
+
+### Token Analytics
+
+```http
+GET /api/token-analytics
+```
+
+---
+
+## Project Structure
+
+```text
+POC-16-Open-Banking-Consent-Flow-Explorer
+
+├── backend
+├── frontend
+├── screenshots
+│   └── dashboard.png
+├── README.md
+├── VAR_REPORT.md
+└── UAT_CHECKLIST.md
 ```
 
 ---
@@ -246,12 +323,24 @@ The project includes:
 * VAR_REPORT.md
 * UAT_CHECKLIST.md
 
-These documents validate compliance with project requirements and user acceptance testing.
+These documents validate visualization quality and user acceptance testing requirements.
+
+---
+
+## Future Enhancements
+
+* Real Open Banking provider integrations
+* OAuth consent flow simulation
+* Real-time token lifecycle monitoring
+* Regulatory compliance insights
+* Multi-bank consent analytics
 
 ---
 
 ## Author
 
-Gopika T P
+**Gopika T P**
 
-POC 16 – Open Banking Consent Flow Explorer
+POC #16 – Open Banking Consent Flow Explorer
+
+Real Rails Intelligence Library
