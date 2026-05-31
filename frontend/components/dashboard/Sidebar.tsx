@@ -58,7 +58,6 @@ function downloadSampleData(
     document.createElement("a");
 
   link.href = url;
-
   link.download = "consents.json";
 
   document.body.appendChild(link);
@@ -83,6 +82,7 @@ export default function Sidebar({
 }: SidebarProps) {
   return (
     <div className="space-y-4">
+      {/* Why This Matters */}
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
           <CardTitle>
@@ -91,13 +91,31 @@ export default function Sidebar({
         </CardHeader>
 
         <CardContent>
-          Open Banking enables customers to
-          securely share financial data across
-          institutions while maintaining
-          consent control.
+          <ul className="space-y-2 text-sm">
+            <li>
+              • Customers retain control over
+              financial data sharing.
+            </li>
+
+            <li>
+              • Access is granted only through
+              explicit consent.
+            </li>
+
+            <li>
+              • Revoked consents immediately
+              terminate access rights.
+            </li>
+
+            <li>
+              • Expired tokens require renewed
+              authorization.
+            </li>
+          </ul>
         </CardContent>
       </Card>
 
+      {/* Who Controls The Rail */}
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
           <CardTitle>
@@ -106,12 +124,43 @@ export default function Sidebar({
         </CardHeader>
 
         <CardContent>
-          Banks, regulators, consent providers,
-          and aggregators collectively govern
-          access to financial data.
+          <div className="space-y-3 text-sm">
+            <div>
+              <strong>Banks</strong>
+
+              <p className="text-slate-400">
+                Store customer financial data.
+              </p>
+            </div>
+
+            <div>
+              <strong>Aggregators</strong>
+
+              <p className="text-slate-400">
+                Manage consent and data exchange.
+              </p>
+            </div>
+
+            <div>
+              <strong>Third Party Apps</strong>
+
+              <p className="text-slate-400">
+                Consume authorized data.
+              </p>
+            </div>
+
+            <div>
+              <strong>Regulators</strong>
+
+              <p className="text-slate-400">
+                Define compliance frameworks.
+              </p>
+            </div>
+          </div>
         </CardContent>
       </Card>
 
+      {/* Selected Consent */}
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
           <CardTitle>
@@ -186,10 +235,52 @@ export default function Sidebar({
         </CardContent>
       </Card>
 
+      {/* Token Simulator */}
       <TokenSimulator
         selectedConsent={selectedConsent}
       />
 
+      {/* Dashboard Intelligence */}
+      <Card className="bg-slate-950 border-slate-800 text-white">
+        <CardHeader>
+          <CardTitle>
+            Dashboard Intelligence
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <div className="space-y-2 text-sm">
+            <p>
+              Active Status:{" "}
+              {selectedConsent
+                ? selectedConsent.status
+                : "N/A"}
+            </p>
+
+            <p>
+              Current Focus: Open Banking
+              Consent Monitoring
+            </p>
+
+            <p>
+              Export: JSON Download Enabled
+            </p>
+
+            <p>
+              Risk Indicator:{" "}
+              {selectedConsent?.status ===
+              "revoked"
+                ? "High"
+                : selectedConsent?.status ===
+                  "expired"
+                ? "Medium"
+                : "Low"}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Filters */}
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
           <CardTitle>
@@ -311,33 +402,36 @@ export default function Sidebar({
         </CardContent>
       </Card>
 
+      {/* Download JSON */}
       <Card className="bg-slate-950 border-slate-800 text-white">
-  <CardHeader>
-    <CardTitle>
-      Download Sample Data
-    </CardTitle>
-  </CardHeader>
+        <CardHeader>
+          <CardTitle>
+            Download Sample Data
+          </CardTitle>
+        </CardHeader>
 
-  <CardContent>
-    <button
-      onClick={() =>
-  downloadSampleData(filteredConsents)
-}
-      className="
-        w-full
-        bg-cyan-600
-        hover:bg-cyan-700
-        px-4
-        py-2
-        rounded
-        text-sm
-        font-medium
-      "
-    >
-      Download JSON
-    </button>
-  </CardContent>
-</Card>
+        <CardContent>
+          <button
+            onClick={() =>
+              downloadSampleData(
+                filteredConsents
+              )
+            }
+            className="
+              w-full
+              bg-cyan-600
+              hover:bg-cyan-700
+              px-4
+              py-2
+              rounded
+              text-sm
+              font-medium
+            "
+          >
+            Download JSON
+          </button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
