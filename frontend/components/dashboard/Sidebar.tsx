@@ -35,6 +35,8 @@ interface SidebarProps {
   setBankFilter: (value: string) => void;
   setStatusFilter: (value: string) => void;
   setScopeFilter: (value: string) => void;
+
+  revokeConsent: () => void;
 }
 
 export default function Sidebar({
@@ -45,24 +47,30 @@ export default function Sidebar({
   setBankFilter,
   setStatusFilter,
   setScopeFilter,
+  revokeConsent,
 }: SidebarProps) {
   return (
     <div className="space-y-4">
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
-          <CardTitle>Why This Matters</CardTitle>
+          <CardTitle>
+            Why This Matters
+          </CardTitle>
         </CardHeader>
 
         <CardContent>
-          Open Banking enables customers to securely
-          share financial data across institutions
-          while maintaining consent control.
+          Open Banking enables customers to
+          securely share financial data across
+          institutions while maintaining
+          consent control.
         </CardContent>
       </Card>
 
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
-          <CardTitle>Who Controls The Rail</CardTitle>
+          <CardTitle>
+            Who Controls The Rail
+          </CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -74,7 +82,9 @@ export default function Sidebar({
 
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
-          <CardTitle>Selected Consent</CardTitle>
+          <CardTitle>
+            Selected Consent
+          </CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -114,20 +124,45 @@ export default function Sidebar({
                 <strong>Refresh Count:</strong>{" "}
                 {selectedConsent.refresh_count}
               </p>
+
+              <button
+                onClick={revokeConsent}
+                disabled={
+                  selectedConsent.status ===
+                  "revoked"
+                }
+                className="
+                  mt-4
+                  w-full
+                  bg-red-600
+                  hover:bg-red-700
+                  disabled:bg-slate-700
+                  disabled:cursor-not-allowed
+                  px-4
+                  py-2
+                  rounded
+                  text-sm
+                  font-medium
+                "
+              >
+                Revoke Consent
+              </button>
             </div>
           ) : (
             <p>No consent selected</p>
           )}
         </CardContent>
       </Card>
-      
+
       <TokenSimulator
         selectedConsent={selectedConsent}
       />
 
       <Card className="bg-slate-950 border-slate-800 text-white">
         <CardHeader>
-          <CardTitle>Dashboard Filters</CardTitle>
+          <CardTitle>
+            Dashboard Filters
+          </CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-4">

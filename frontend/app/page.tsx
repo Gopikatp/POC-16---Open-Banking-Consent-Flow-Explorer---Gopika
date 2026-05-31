@@ -60,11 +60,15 @@ export default function Home() {
 
   async function loadDashboardData() {
     try {
-      const metricsResponse = await api.get("/metrics");
+      const metricsResponse = await api.get(
+        "/metrics"
+      );
 
       setMetrics(metricsResponse.data);
 
-      const scopesResponse = await api.get("/scopes");
+      const scopesResponse = await api.get(
+        "/scopes"
+      );
 
       const formattedScopes = Object.entries(
         scopesResponse.data
@@ -115,6 +119,29 @@ export default function Home() {
     }
   );
 
+  function revokeConsent() {
+    if (!selectedConsent) return;
+
+    const updatedConsents = consents.map(
+      (consent) =>
+        consent.id === selectedConsent.id
+          ? {
+              ...consent,
+              status: "revoked",
+            }
+          : consent
+    ) as Consent[];
+
+    setConsents(updatedConsents);
+
+    const updatedSelected =
+      updatedConsents.find(
+        (c) => c.id === selectedConsent.id
+      ) || null;
+
+    setSelectedConsent(updatedSelected);
+  }
+
   return (
     <DashboardLayout
       sidebar={
@@ -126,6 +153,7 @@ export default function Home() {
           setBankFilter={setBankFilter}
           setStatusFilter={setStatusFilter}
           setScopeFilter={setScopeFilter}
+          revokeConsent={revokeConsent}
         />
       }
     >
@@ -139,9 +167,21 @@ export default function Home() {
         </p>
 
         <MetricsCards
-          active={metrics.active_consents}
-          revoked={metrics.revoked_consents}
-          expired={metrics.expired_consents}
+          active={
+            consents.filter(
+              (c) => c.status === "active"
+            ).length
+          }
+          revoked={
+            consents.filter(
+              (c) => c.status === "revoked"
+            ).length
+          }
+          expired={
+            consents.filter(
+              (c) => c.status === "expired"
+            ).length
+          }
         />
 
         <ConsentFlowChart data={scopeData} />
