@@ -45,6 +45,15 @@ export default function Home() {
   const [selectedConsent, setSelectedConsent] =
     useState<Consent | null>(null);
 
+  const [bankFilter, setBankFilter] =
+    useState("All");
+
+  const [statusFilter, setStatusFilter] =
+    useState("All");
+
+  const [scopeFilter, setScopeFilter] =
+    useState("All");
+
   useEffect(() => {
     loadDashboardData();
   }, []);
@@ -84,11 +93,39 @@ export default function Home() {
     }
   }
 
+  const filteredConsents = consents.filter(
+    (consent) => {
+      const bankMatch =
+        bankFilter === "All" ||
+        consent.bank === bankFilter;
+
+      const statusMatch =
+        statusFilter === "All" ||
+        consent.status === statusFilter;
+
+      const scopeMatch =
+        scopeFilter === "All" ||
+        consent.scope === scopeFilter;
+
+      return (
+        bankMatch &&
+        statusMatch &&
+        scopeMatch
+      );
+    }
+  );
+
   return (
     <DashboardLayout
       sidebar={
         <Sidebar
           selectedConsent={selectedConsent}
+          bankFilter={bankFilter}
+          statusFilter={statusFilter}
+          scopeFilter={scopeFilter}
+          setBankFilter={setBankFilter}
+          setStatusFilter={setStatusFilter}
+          setScopeFilter={setScopeFilter}
         />
       }
     >
@@ -110,7 +147,7 @@ export default function Home() {
         <ConsentFlowChart data={scopeData} />
 
         <AuditLog
-          consents={consents}
+          consents={filteredConsents}
           onSelectConsent={setSelectedConsent}
         />
       </div>
